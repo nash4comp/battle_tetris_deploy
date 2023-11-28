@@ -1,0 +1,270 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* This file is for your main application CSS */
+:root {
+    --overlay-background-color: rgba(255, 255, 255, 0.7);
+
+    --white: #ffffff;
+    --keyboard-gray: #f0f0f0;
+    --light-gray: #d3d3d3;
+    --text-color: #081f35;
+    --dark-blue: #0d4c85;
+    --blue: #71aeca;
+    --light-blue: #eaf6fc;
+    --beige: #efe7d0;
+    --wine: #a52137;
+    --yellow: #f4cd58;
+
+    --board-padding: 10px;
+    --board-border-radius: 10px;
+    --keyboard-width: 40px;
+}
+
+/* main style */
+
+* {
+    box-sizing: border-box;
+}
+  
+body {
+    background: var(--light-blue);
+    font-family: "Roboto", "Helvetica", sans-serif;
+    color: var(--text-color);
+    display: flex;
+    font-size: 16px;
+    overflow: hidden;
+    width: 100%;
+}
+
+footer {
+    margin: 30px;
+    font-size: 0.9rem;
+
+    & p {
+        margin: 0.5rem 0;
+    }
+}
+
+h1, a {
+    color: var(--wine);
+}
+
+kbd {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 4px;
+    font-family: "Roboto Mono", Courier, monospace;
+    text-shadow: 0 1px 0 #ffffff;
+    background-color: var(--keyboard-gray);
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.3) inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.3) inset;
+    white-space: nowrap;
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* game general style */
+
+.game {
+    outline: 1px solid var(--wine);
+    margin-block: 30px;
+    margin-right: 10px;
+    display: flex;
+    & > *:not(:last-child) {
+        margin-right: 5px;
+    }
+}
+
+.board {
+    position: relative;
+    padding: var(--board-padding);
+    border-radius: var(--board-border-radius);
+    background-color: var(--white);
+    outline: 2px solid var(--dark-blue);
+}
+
+.board-row {
+    display: flex;
+    justify-content: center;
+}
+
+.block-part {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 auto;
+    background-color: var(--white);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    &:not(.block-part--nil) {
+        box-shadow: inset 1px 1px 1px rgba(white, 0.5), inset -1px -1px 1px rgba(black, 0.5);
+    }
+}
+
+.block-part--o {
+    background-color: red;
+}
+
+.block-part--i {
+    background-color: green;
+}
+
+.block-part--t {
+    background-color: blue;
+}
+
+.block-part--j {
+    background-color: yellow;
+}
+
+.block-part--l {
+    background-color: orange;
+}
+
+.block-part--z {
+    background-color: indigo;
+}
+
+.block-part--s {
+    background-color: violet;
+}
+
+.block-part--d {
+    background-color: black;
+}
+
+.panel h1 {
+    margin-top: 0;
+    white-space: nowrap;
+}
+
+.panel-box {
+    margin: 20px 0;
+    width: 100%;
+    border-radius: var(--board-border-radius);
+    background-color: var(--white);
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.panel-box-title {
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+.panel-box-content {
+    padding: 5px 10px;
+    text-align: center;
+
+    & .board {
+        padding: 0;
+    }
+}
+
+.lines, .score, .level {
+    font-size: 1.5em;
+}
+
+/* overlay */
+.overlay {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    background-color: var(--overlay-background-color);
+}
+
+.overlay-content {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 30px;
+}
+
+/* controls */
+
+.controls {
+    display: grid;
+    text-align: center;
+    grid-template-columns: calc(50% - var(--keyboard-width) * 1.5) var(--keyboard-width) var(--keyboard-width) var(--keyboard-width) calc(50% - var(--keyboard-width) * 1.5);
+    grid-template-rows: 1fr 1fr 1fr 1.3fr 1fr 1fr 1.3fr 1fr 1.3fr 1fr;
+
+    & > * {
+        margin-bottom: 5px;
+    }
+}
+  
+.label {
+    height: 20px;
+    line-height: 20px;
+
+    &.left,
+    &.right,
+    &.rotate {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &.rotate {
+        grid-column-start: 2;
+        grid-column-end: 5;
+    }
+    &.left {
+        grid-row: 3;
+        grid-column: 1;
+    }
+    &.right {
+        grid-row: 3;
+        grid-column: 5;
+    }
+    &.down {
+        grid-row: 4;
+        grid-column-start: 2;
+        grid-column-end: 5;
+    }
+    &.space {
+        grid-row: 7;
+        grid-column-start: 2;
+        grid-column-end: 5;
+    }
+}
+  
+.key.down {
+    grid-row: 3;
+    grid-column: 3;
+}
+
+.key.right {
+    grid-row: 3;
+    grid-column: 4;
+}
+
+.key.left {
+    grid-row: 3;
+    grid-column: 2;
+}
+
+.key.up {
+    grid-row-start: 2;
+    grid-column: 3;
+}
+
+.key.space {
+    grid-row: 6;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}

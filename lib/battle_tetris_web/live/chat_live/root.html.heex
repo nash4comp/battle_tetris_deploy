@@ -1,0 +1,14 @@
+<Rooms.sidebar
+  rooms={@rooms}
+  room={@room}
+  live_action={@live_action}
+/>
+<div class="p-2 sm:ml-36">
+  <Room.show
+    :if={@live_action==:show}
+    messages={@streams.messages}
+    current_user_id={@current_user.id}
+    room={@room}
+    present={@present}
+  />
+</div>
