@@ -32,9 +32,4 @@ stream_chat-*.tar
 npm-debug.log
 /assets/node_modules/
 
-.dockerignore
-Dockerfile
-fly.toml
-/rel
-
 /.vscode
